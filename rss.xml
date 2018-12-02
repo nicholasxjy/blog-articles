@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nicholas Blog]]></title><description><![CDATA[Some words from Nick]]></description><link>http://github.com/dylang/node-rss</link><generator>RSS for Node</generator><lastBuildDate>Sun, 02 Dec 2018 07:09:53 GMT</lastBuildDate><item><title><![CDATA[How to config ESLint and Prettier for your vue projects]]></title><description><![CDATA[ESlint 通过对代码加以规范，尽可能的保证代码的统一性，也避免了代码中容易歧义而难以发现的bugs。 Prettier  通过按照规范自动化格式代码，让代码更加易读和清晰。
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nicholas Blog]]></title><description><![CDATA[Some words from Nick]]></description><link>http://github.com/dylang/node-rss</link><generator>RSS for Node</generator><lastBuildDate>Sun, 02 Dec 2018 07:11:49 GMT</lastBuildDate><item><title><![CDATA[How to config ESLint and Prettier for your vue projects]]></title><description><![CDATA[ESlint 通过对代码加以规范，尽可能的保证代码的统一性，也避免了代码中容易歧义而难以发现的bugs。 Prettier  通过按照规范自动化格式代码，让代码更加易读和清晰。
 本文讲述vue项目中的ESLint和Prettier的配置，希望可以帮助大家。 前言 我的一个vue…]]></description><link>/config-eslint-and-prettier/</link><guid isPermaLink="false">/config-eslint-and-prettier/</guid><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;ESlint&lt;/strong&gt;通过对代码加以规范，尽可能的保证代码的统一性，也避免了代码中容易歧义而难以发现的bugs。&lt;strong&gt;Prettier&lt;/strong&gt; 通过按照规范自动化格式代码，让代码更加易读和清晰。
 本文讲述vue项目中的ESLint和Prettier的配置，希望可以帮助大家。&lt;/p&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
@@ -6,7 +6,7 @@
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png&quot;
+    href=&quot;/blog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -25,11 +25,11 @@
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;Project&quot;
         title=&quot;project&quot;
-        src=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png&quot;
-        srcset=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/1a291/project.png 148w,
-/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/2bc4a/project.png 295w,
-/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png 590w,
-/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png 702w&quot;
+        src=&quot;/blog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png&quot;
+        srcset=&quot;/blog-articles/static/29929dccc7a0bc3220903b162bce736c/1a291/project.png 148w,
+/blog-articles/static/29929dccc7a0bc3220903b162bce736c/2bc4a/project.png 295w,
+/blog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png 590w,
+/blog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png 702w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
@@ -99,7 +99,7 @@
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png&quot;
+    href=&quot;/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -118,14 +118,14 @@
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;error&quot;
         title=&quot;&quot;
-        src=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png&quot;
-        srcset=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/1a291/error.png 148w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/2bc4a/error.png 295w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png 590w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/526de/error.png 885w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fa2eb/error.png 1180w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/08f6a/error.png 1770w,
-/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png 2146w&quot;
+        src=&quot;/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png&quot;
+        srcset=&quot;/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/1a291/error.png 148w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/2bc4a/error.png 295w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png 590w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/526de/error.png 885w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fa2eb/error.png 1180w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/08f6a/error.png 1770w,
+/blog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png 2146w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
@@ -137,7 +137,7 @@
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png&quot;
+    href=&quot;/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -156,14 +156,14 @@
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;resolve&quot;
         title=&quot;&quot;
-        src=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png&quot;
-        srcset=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/1a291/resolve.png 148w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/2bc4a/resolve.png 295w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png 590w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/526de/resolve.png 885w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fa2eb/resolve.png 1180w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/08f6a/resolve.png 1770w,
-/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png 1946w&quot;
+        src=&quot;/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png&quot;
+        srcset=&quot;/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/1a291/resolve.png 148w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/2bc4a/resolve.png 295w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png 590w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/526de/resolve.png 885w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fa2eb/resolve.png 1180w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/08f6a/resolve.png 1770w,
+/blog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png 1946w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
@@ -189,7 +189,7 @@
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;按照上述配置，在&lt;code class=&quot;language-text&quot;&gt;VS Code&lt;/code&gt;中当你save一个文件时，会自动帮助你解决&lt;code class=&quot;language-text&quot;&gt;ESLint&lt;/code&gt;的问题，而且会自动&lt;code class=&quot;language-text&quot;&gt;美化&lt;/code&gt;你的代码。&lt;/p&gt;
 &lt;p&gt;效果如下：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/nickblog-articles/format-05de9b93c8a0ca8230af9cdef554209b.gif&quot; alt=&quot;format&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog-articles/format-05de9b93c8a0ca8230af9cdef554209b.gif&quot; alt=&quot;format&quot;&gt;&lt;/p&gt;
 &lt;h2&gt;4. 在提交代码之前的防范措施&lt;/h2&gt;
 &lt;p&gt;在我们没解决规范的问题时，我们不能就提交代码到git仓库，我们需要添加一些措施防范此种行为。&lt;/p&gt;
 &lt;p&gt;此时我们需要安装两个依赖，达到此目的：&lt;/p&gt;
