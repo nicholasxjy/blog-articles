@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nicholas Blog]]></title><description><![CDATA[Some words from Nick]]></description><link>http://github.com/dylang/node-rss</link><generator>RSS for Node</generator><lastBuildDate>Sun, 02 Dec 2018 07:09:53 GMT</lastBuildDate><item><title><![CDATA[How to config ESLint and Prettier for your vue projects]]></title><description><![CDATA[ESlint 通过对代码加以规范，尽可能的保证代码的统一性，也避免了代码中容易歧义而难以发现的bugs。 Prettier  通过按照规范自动化格式代码，让代码更加易读和清晰。
+本文讲述vue项目中的ESLint和Prettier的配置，希望可以帮助大家。 前言 我的一个vue…]]></description><link>/config-eslint-and-prettier/</link><guid isPermaLink="false">/config-eslint-and-prettier/</guid><pubDate>Sun, 02 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;&lt;strong&gt;ESlint&lt;/strong&gt;通过对代码加以规范，尽可能的保证代码的统一性，也避免了代码中容易歧义而难以发现的bugs。&lt;strong&gt;Prettier&lt;/strong&gt; 通过按照规范自动化格式代码，让代码更加易读和清晰。
+本文讲述vue项目中的ESLint和Prettier的配置，希望可以帮助大家。&lt;/p&gt;
+&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;我的一个vue项目的目录结构如图所示：&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 253.84615384615387%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAzCAYAAACXICiDAAAACXBIWXMAABYlAAAWJQFJUiTwAAAEzElEQVRYw+1XWXPaaBCUuG8wGAzGGHPoQoC4jLliO3E5d21la9/y//9Hb88nINipGLHP+zCWMKKZnp7pb9B+uCv89WkA958BMqMB9HMXkUsX4Zpc+4zBSaFl+Sd7M0C0aUO/dBCqDRC+lBhCqzjQyvZpkTLXuFz8gFYiWLWPVOcO6e4CGWPlP3Bu+cBBI96cINmeQ6/2EG+MCLZEiq8lMsYSiZsptKJBYJNfavpf8FaG2rmhkMO1PnLGHQru4z7O+u+RszeIXU8Qb04Rv5khXPf4fA/axR8i1vCQc96RrovkzQQZc6Uo56wN8s69uhZ69wq4NPig2LxZhhCpahWpla1oFb0n1NZ/I8GMcvY7lsL1KZcOKL8llgBGWTt5KFR2kPDuEFuvkO0sVaZ7YeS6y+Lw/nXErkfIk5Jkp5ddlKZzXH5YItlaKnohtk/4arSt3REwiZ0ofiY9lL0pWvcrAo0RpRgSseaM16kvxjFAESXVvVMPRip9RAfMZGwh0yLdC+f3NjmWZdZaojr/5kvOB6P1Ia7NJcrWml+0rWNpK0oQQJ/y7gFeqx7mcwfmyEO8s0GW4NLg0ui7L32TcoK9J324oxStj9AajVFzp0gZG/bhmgLdItYYBxNFUb79ugV0EBen6T8h1ntEXpqc2anMTqIsc7r9R+KCtvXlOxKrZ2Rbd4hceT5YkB70zWGM4uC9+pAuqpYHePy4wHC9RORmgQLLkSXtQPVTgNLYUkM1UjZ9cITJnYfOaEZRVnxvoywtEJiifNaGlm/tVdarAziehyt3hhgpiyBiuIEBk+0ZzoSyEsVChCr3R300emOkrXvVl3tBgkS6M/dnWV6wTuGrCepmExWzh0R3DZ1ni3ZxQmjFDoS23pgg7DwiMvyMp8UG3vwZ6clPZIbfoTPTsP0YKDStbPoTQnRdHOXSQ5YWlnc5duYDm3uNsBgDXUe9fyz2gNsaakUTLXeEinVL914jQ+NIi8qVnS9a/vVPoQC3CuqiUsnGM+fYsMeIdVdIUeUsJyaw0oeAfhYOct02x67Phn7w3abivLT+QIDlLSDP53OzizPDRYKeKNnFabLBG/swQ4KGLiykmyZyJtvJeVBToh+OXeAMVf3o1FxLisYUifZCHZ8J1jBC9eSYPb2GZ1364D1a0488R6aKrigssy4HfaC15CVlA6kaD/bGJyQ7s4PDnr1Y+y8ql7uI1+6RaXxl7WbM0HfrwF74GyCNtsapsLl5xUi1wM1B2kaJcnLbKEAbjYaNQbunmvqs5/dhlAd9YKV/AfpNXb/uwul0keABJYBCWRxbrXVBsnyZocUm9gjCnbHl74eyeIrKv/VjUMrp6yHyLYJ2FgpIspP9UIGdXkMLITp0VLZXtRYvFWB0d/KdVkNHfSjamiHJ3suQoiyZeSqdkM2VbqMHmZbXGWZZv5K12C/vEnJfoEAygkeFeW0OKd6X5KeGZCc15PjtqMtraaE3R/ClHzpI8r5AarKCCJjQlnlWFibPHFP6dYZp9mOVh39G5phgArgziUh9eKooBopU2Lj9QvuaKyCpn6zGYmUy2ycAkkqhjYvRZxgPP+mDMwWidkOCCphkq7IMVMOy8+vs2G1jrzf/IGvxyxoG/OkQXBT7tB+K/wNK/AuwZSZrYkyKfAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Project&quot;
+        title=&quot;project&quot;
+        src=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png&quot;
+        srcset=&quot;/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/1a291/project.png 148w,
+/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/2bc4a/project.png 295w,
+/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/fb8a0/project.png 590w,
+/nickblog-articles/static/29929dccc7a0bc3220903b162bce736c/7bf43/project.png 702w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;先不关注各个文件的用处，按照下面一步一步开始配置。&lt;/p&gt;
+&lt;h2&gt;1. 安装需要的依赖&lt;/h2&gt;
+&lt;h3&gt;1.1 安装ESLint相关依赖&lt;/h3&gt;
+&lt;p&gt;你需要执行&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; i -D eslint babel-eslint eslint-loader eslint-plugin-vue@next&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;eslint-loader是webpack的loader，而eslint-plugin-vue则定义了很多vue的eslint的规则。
+同时我们还需要安装eslint的prettier需要的依赖：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; i -D eslint-plugin-prettier eslint-config-prettier&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;eslint-config-prettier&lt;/code&gt; 关闭了eslint和prettier可能存在的一些冲突，而 &lt;code class=&quot;language-text&quot;&gt;eslint-plugin-prettier&lt;/code&gt; 可以让prettier不符合规范的作为eslint的不规范向我们提示。&lt;/p&gt;
+&lt;h3&gt;1.2 安装Prettier相关依赖&lt;/h3&gt;
+&lt;p&gt;只需要执行: &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; i -D prettier&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;2. 配置文件&lt;/h2&gt;
+&lt;h3&gt;2.1 ESLint的配置&lt;/h3&gt;
+&lt;p&gt;ESLint的配置可以很多种形式去书写，单独的配置文件，package.json等等。我们这里单独使用配置文件，具体详情请参照&lt;a href=&quot;https://eslint.org/docs/user-guide/configuring&quot;&gt;Configuring ESLint&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;首先我们在项目里创建文件 &lt;code class=&quot;language-text&quot;&gt;.eslintrc&lt;/code&gt;，配置如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;root&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;parserOptions&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;parser&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;babel-eslint&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;sourceType&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;module&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;ecmaVersion&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2017&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;extends&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;plugin:vue/essential&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;env&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;browser&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;node&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;vue&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;globals&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;CONFIG&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;vue/require-default-prop&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;off&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;vue/no-v-html&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;off&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中主要两点是需要在&lt;code class=&quot;language-text&quot;&gt;extends&lt;/code&gt;中添加&lt;code class=&quot;language-text&quot;&gt;plugin:vue/essential&lt;/code&gt;，以及&lt;code class=&quot;language-text&quot;&gt;plugins&lt;/code&gt;中添加&lt;code class=&quot;language-text&quot;&gt;vue&lt;/code&gt;，此时我们的项目中ESLint的规则就设置完毕。&lt;/p&gt;
+&lt;h3&gt;2.2 Prettier配置&lt;/h3&gt;
+&lt;p&gt;同样在项目创建文件&lt;code class=&quot;language-text&quot;&gt;.prettierrc&lt;/code&gt;，配置如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;printWidth&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;semi&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;useTabs&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;singleQuote&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;tabWidth&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;此时我们需要在&lt;code class=&quot;language-text&quot;&gt;.eslintrc&lt;/code&gt;中添加&lt;code class=&quot;language-text&quot;&gt;Prettier&lt;/code&gt;需要的配置，如下(前后对比)：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token property&quot;&gt;&quot;extends&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;plugin:vue/essential&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;plugin:prettier/recommended&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;plugins&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;vue&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;prettier&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;prettier/prettier&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;error&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;vue/require-default-prop&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;off&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;vue/no-v-html&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;off&quot;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;此时我们的基本配置就差不多已经完成，如果你通过webpack开启你的项目，就会看到&lt;code class=&quot;language-text&quot;&gt;ESLint&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;Prettier&lt;/code&gt;提示的很多错误，这就需要我们解决。&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 51.25815470643057%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAABYlAAAWJQFJUiTwAAABjElEQVQoz5WSXXOaQBSGUUGT+NGiIAIaNQ2iu3wKNBovOu1N//8venoYO01m2jSTi2fO7gDveTi7hhVdGOc/MdcVxnSHMdtLjen5CcNNzeShwY5O3KwKDFeezQ//px/mDOMzd/UPhqrC1TXuvmSyyRiuNJ2FvOQe6C7U+2EtHU/RmSvMx4ZPzQW/rFnnFX5aEkq104y5fuZuW10N36Pnayyh91AzLk8EumAplkFSEaoGJyq5uU/oSmNTLE1fMRAs/w1jM0joLxPZaG71mWlS4KuT8MT8ULFWZ7xdzvLwhB3nBPsjs23O5D69BvxtmNDxNObmyECCemFKL0gxlxlGmMheSUPNQKoVaPqhxpA/aj9ux2V46h+Gom9GXxknDW5cMd9dWGXfGaln7H0uh1QQHkr8qGAhaztuGK4LpjKmz3ITRkEuDZNreHch8wkzbstvWHIwxiyW7vFV33mD1k5sXvPH0JKwwZcj/Z2EefvfYYITv6w/Qjuz6faMI9gS7D/WeFHGSO6g4chFdz/GL9awBZfGzahEAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;error&quot;
+        title=&quot;&quot;
+        src=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png&quot;
+        srcset=&quot;/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/1a291/error.png 148w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/2bc4a/error.png 295w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fb8a0/error.png 590w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/526de/error.png 885w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/fa2eb/error.png 1180w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/08f6a/error.png 1770w,
+/nickblog-articles/static/34df5fd0f0db367a7facce5743c29e0b/ff845/error.png 2146w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;p&gt;当我们解决之后，代码美如下：&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 73.07297019527236%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAACKklEQVQ4y5VUa3OaUBQEhKhUERREoYov5P0MUVLTmSYf2v//i7bnghkzaprph53DjOfu3T17rpzk/8Qo/wNpcwSne+AmPlXCZA/ZKTHcPEF1a+j+Ccr2AG4a/Bvi8hG9/QmD4290vQryNoW6zSCvUvDUwBtEPqaL1B04zf2akB1iysTNI4ZFDSM/wikPWKSPcJIKTlFhEGSYeDW0fQ1+FoFjl7BzrF5DoAZ+GqHjFBjUb9DzEqu0wjTMYNH3LChgZTnGfgXxe3oh+kxhQ9ggRjc4YOiTml0BzS1g7EtoOxqJnVCz3854ekV2Td6xEgjzmH6IIC1CaCkpSn5hRCPokerusoRok7KJ1x7WP+Cj9VvCEKKTQSG7RpiT1SMUN0V/FUNdJVAIIwpKXicY0Lfs0CVmeKuQkTG7vBnhIXgGv8xJzTlNw0PHDCDOQghUO1Q5qrz5bje4VckUMjIWipz9gLzJoO6eaXVqDClVcfuEB1L5jZSp6xSKk2BI0KhPtKJbhWw+jeVpTHZL6NkBg3UFZXOAtKvAzaMmCL5RGEBgeFd7NxQiawj1EP1NgElcoEdEnUWGIRGP6HX07RKSxUYTXsIw/Pv7yBQyy9KOrPl1uxY0bJ7AVqrd07B5NRdFZ9xb7M6cUqY9k6tX9JKXNjndu9N8DuGrp9dd0K7RnwCzKZgeJNNFd06Eutumrf8nBJrNeHWCtX+DGb3A9k6w6ZnZPj3FZdzO7DN7d/AXP7yE09bR1ygAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;resolve&quot;
+        title=&quot;&quot;
+        src=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png&quot;
+        srcset=&quot;/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/1a291/resolve.png 148w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/2bc4a/resolve.png 295w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fb8a0/resolve.png 590w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/526de/resolve.png 885w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/fa2eb/resolve.png 1180w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/08f6a/resolve.png 1770w,
+/nickblog-articles/static/0500e979ebe5b9d2419c998f7e51cf5e/963a0/resolve.png 1946w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;h2&gt;3. 编辑器的配置&lt;/h2&gt;
+&lt;p&gt;目前很多编辑器都有&lt;code class=&quot;language-text&quot;&gt;ESLint&lt;/code&gt;和&lt;code class=&quot;language-text&quot;&gt;Prettier&lt;/code&gt;的插件集成，所以我们完全可以通过插件，自动帮助我们实时的解决代码格式规范问题。&lt;/p&gt;
+&lt;p&gt;这里只讲一下&lt;code class=&quot;language-text&quot;&gt;Visual Studio Code&lt;/code&gt;即（VSCode）的配置：&lt;/p&gt;
+&lt;p&gt;在&lt;code class=&quot;language-text&quot;&gt;VSCode&lt;/code&gt;中你需要安装&lt;code class=&quot;language-text&quot;&gt;ESlint&lt;/code&gt;和 &lt;code class=&quot;language-text&quot;&gt;Prettier - Code formatter&lt;/code&gt;两个插件，然后在&lt;code class=&quot;language-text&quot;&gt;settings.json&lt;/code&gt;中配置如下：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;prettier.eslintIntegration&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;eslint.autoFixOnSave&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;eslint.validate&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;javascript&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token string&quot;&gt;&quot;javascriptreact&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token property&quot;&gt;&quot;language&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;vue&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;token property&quot;&gt;&quot;autoFix&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;按照上述配置，在&lt;code class=&quot;language-text&quot;&gt;VS Code&lt;/code&gt;中当你save一个文件时，会自动帮助你解决&lt;code class=&quot;language-text&quot;&gt;ESLint&lt;/code&gt;的问题，而且会自动&lt;code class=&quot;language-text&quot;&gt;美化&lt;/code&gt;你的代码。&lt;/p&gt;
+&lt;p&gt;效果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/nickblog-articles/format-05de9b93c8a0ca8230af9cdef554209b.gif&quot; alt=&quot;format&quot;&gt;&lt;/p&gt;
+&lt;h2&gt;4. 在提交代码之前的防范措施&lt;/h2&gt;
+&lt;p&gt;在我们没解决规范的问题时，我们不能就提交代码到git仓库，我们需要添加一些措施防范此种行为。&lt;/p&gt;
+&lt;p&gt;此时我们需要安装两个依赖，达到此目的：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; i -D husky lint-staged&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;然后在我们的&lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;文件中，做如下配置：&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;json&quot;&gt;&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;husky&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token property&quot;&gt;&quot;hooks&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token property&quot;&gt;&quot;pre-commit&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;lint-staged&quot;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;&quot;lint-staged&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token property&quot;&gt;&quot;*.{js,vue}&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;eslint --fix&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;prettier --write&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;token string&quot;&gt;&quot;git add&quot;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;具体配置和说明请参照最后链接查看官方文档~&lt;/p&gt;
+&lt;p&gt;最后如果有问题或者详细了解配置还请去看官方文档，希望文章可以帮助到大家。Peace out ！！！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://eslint.org/&quot;&gt;ESLint - The pluggable linting utility for JavaScript and JSX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://prettier.io/&quot;&gt;Prettier - An opinionated code formatter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/typicode/husky&quot;&gt;Husky can prevent bad git commit, git push and more 🐶 woof!&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/okonet/lint-staged&quot;&gt;lint-staged - Run linters against staged git files and don’t let 💩 slip into your code base!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item></channel></rss>
